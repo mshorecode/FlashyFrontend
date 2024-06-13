@@ -21,6 +21,7 @@ export default function NavBar() {
     'Flashcards',
     'Sets',
     'Tags',
+    'Log Out',
   ];
 
   return (
@@ -56,11 +57,12 @@ export default function NavBar() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button onClick={signOut} variant="shadow" color="danger" className="">
+          <Button onClick={signOut} variant="shadow" color="danger" size="sm">
             <p className="font-bold text-whte">Sign Out</p>
           </Button>
         </NavbarItem>
       </NavbarContent>
+
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
