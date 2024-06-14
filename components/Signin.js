@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button } from '@nextui-org/react';
 import { signIn } from '../utils/auth';
 
 function Signin() {
