@@ -1,7 +1,5 @@
+import { Spinner } from '@nextui-org/react';
 import React from 'react';
-import {
-  Spinner,
-} from 'react-bootstrap';
 
 export default function Loading() {
   return (

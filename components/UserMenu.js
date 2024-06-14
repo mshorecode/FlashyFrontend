@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
 import { useRouter } from 'next/router';
+import {
+  Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger,
+} from '@nextui-org/react';
 import { useAuth } from '../utils/context/authContext';
 import { signOut } from '../utils/auth';
 
@@ -15,18 +15,27 @@ export default function UserMenu() {
   };
 
   return (
-    <Dropdown
-      align="end"
-      navbar="true"
-      className="last:mt-auto"
-    >
-      <Dropdown.Toggle className="border-none bg-transparent">
-        <img src={user.imageUrl} alt="Profile Image" className="h-10 w-10 rounded-full" />
-      </Dropdown.Toggle>
-      <Dropdown.Menu className="rounded-sm">
-        <Dropdown.Item onClick={dashboard}>Dashboard</Dropdown.Item>
-        <Dropdown.Item onClick={signOut}>Sign Out</Dropdown.Item>
-      </Dropdown.Menu>
+    <Dropdown placement="bottom-end">
+      <DropdownTrigger>
+        <Avatar
+          isBordered
+          src={user.imageUrl}
+          as="button"
+          className="transition-transform"
+          name={user.firstName}
+          color="success"
+          size="md"
+          alt="Picture of user"
+        />
+      </DropdownTrigger>
+      <DropdownMenu aria-label="User Actions" variant="solid" color="primary">
+        <DropdownItem key="profile" className="h-14 gap-1" textValue="Logged in user">
+          <p className="font-semibold">Signed in as</p>
+          <p className="font-semibold">{user.email}</p>
+        </DropdownItem>
+        <DropdownItem key="dashboard" onClick={dashboard} textValue="Dashboard">Dashboard</DropdownItem>
+        <DropdownItem key="logout" color="danger" onClick={signOut} textValue="Log Out">Log Out</DropdownItem>
+      </DropdownMenu>
     </Dropdown>
   );
 }
