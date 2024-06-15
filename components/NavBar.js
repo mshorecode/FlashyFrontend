@@ -18,7 +18,7 @@ export default function NavBar() {
       <NavbarContent>
         <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} className="sm:hidden" />
         <NavbarBrand>
-          <Link color="foreground" href="/">
+          <Link color="foreground" href="/dashboard">
             <p className="font-bold text-xl text-inherit cursor-pointer">Memoria</p>
           </Link>
         </NavbarBrand>
@@ -48,6 +48,7 @@ export default function NavBar() {
         <UserMenu />
       </NavbarContent>
 
+      {/* TODO: figure out logic around setting appropriate href to each option */}
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
