@@ -11,7 +11,7 @@ export default function UserMenu() {
   const router = useRouter();
 
   const dashboard = () => {
-    router.push('/');
+    router.push('/dashboard');
   };
 
   return (
