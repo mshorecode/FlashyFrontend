@@ -8,7 +8,8 @@ const getFlashcards = () => new Promise((resolve, reject) => {
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then((resp) => resolve(resp.json).then(console.warn(resp)))
+  }).then((response) => response.json())
+    .then((data) => resolve(data))
     .catch(reject);
 });
 
