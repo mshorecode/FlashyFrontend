@@ -21,6 +21,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
           <Component {...pageProps} />
         </div>
       </div>
+
     );
   }
 

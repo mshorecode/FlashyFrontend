@@ -8,7 +8,7 @@ function Signin() {
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content gap-40">
         <div className="max-w-md">
-          <h1 className="text-8xl font-bold text-[#FFFFFE]">Flashy</h1>
+          <h1 className="text-8xl font-bold text-[#FFFFFE]">Memoria</h1>
           <p className="pt-2 text-[#94A1B2] text-4xl">Retain More,</p>
           <p className="pb-6 text-[#94A1B2] text-4xl">Stress Less</p>
         </div>

@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
-// import Link from 'next/link';
 import {
   Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link,
 } from '@nextui-org/react';
 import UserMenu from './UserMenu';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +13,7 @@ export default function NavBar() {
   const menuItems = ['Flashcards', 'Sets', 'Tags'];
 
   return (
-    <Navbar position="static" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar position="sticky" onMenuOpenChange={setIsMenuOpen} isBordered>
       {/* Left Nav */}
       <NavbarContent>
         <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} className="sm:hidden" />
@@ -45,6 +45,7 @@ export default function NavBar() {
 
       {/* Right Nav */}
       <NavbarContent as="div" justify="end">
+        <ThemeSwitcher />
         <UserMenu />
       </NavbarContent>
 

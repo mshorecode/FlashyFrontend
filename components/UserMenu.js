@@ -24,7 +24,7 @@ export default function UserMenu() {
           className="transition-transform"
           name={user.firstName}
           color="success"
-          size="md"
+          size="sm"
           alt="Picture of user"
         />
       </DropdownTrigger>
