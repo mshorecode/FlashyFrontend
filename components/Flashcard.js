@@ -4,9 +4,9 @@ import { Card, CardBody } from '@nextui-org/react';
 
 export default function Flashcard({ flashcard }) {
   return (
-    <Card>
+    <Card className="w-[500px] h-[300px]">
       <CardBody>
-        <p>{flashcard.question}</p>
+        <p className="my-auto text-center font-bold p-5">{flashcard.question}</p>
       </CardBody>
     </Card>
   );
