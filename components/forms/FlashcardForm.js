@@ -62,7 +62,6 @@ export default function FlashcardForm({ flashcard }) {
                   name="question"
                   value={formData.question}
                   onChange={handleChange}
-                  placeholder="Edit question"
                   variant="bordered"
                 />
                 <Spacer />
@@ -71,7 +70,6 @@ export default function FlashcardForm({ flashcard }) {
                   name="answer"
                   value={formData.answer}
                   onChange={handleChange}
-                  placeholder="Edit answer"
                   variant="bordered"
                 />
               </ModalBody>

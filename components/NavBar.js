@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import {
   Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link,
+  Image,
 } from '@nextui-org/react';
 import UserMenu from './UserMenu';
 import ThemeSwitcher from './ThemeSwitcher';
@@ -19,6 +20,7 @@ export default function NavBar() {
         <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} className="sm:hidden" />
         <NavbarBrand>
           <Link color="foreground" href="/dashboard">
+            <Image src="/brain.png" className="w-14 h-14" />
             <p className="font-bold text-xl text-inherit cursor-pointer">Memoria</p>
           </Link>
         </NavbarBrand>
