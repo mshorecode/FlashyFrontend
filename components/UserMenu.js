@@ -14,6 +14,10 @@ export default function UserMenu() {
     router.push('/dashboard');
   };
 
+  const tagManager = () => {
+    router.push('/tagmanager');
+  };
+
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
@@ -23,17 +27,18 @@ export default function UserMenu() {
           as="button"
           className="transition-transform"
           name={user.firstName}
-          color="success"
+          color="warning"
           size="sm"
           alt="Picture of user"
         />
       </DropdownTrigger>
-      <DropdownMenu aria-label="User Actions" variant="solid" color="primary">
+      <DropdownMenu aria-label="User Actions" variant="solid" color="default">
         <DropdownItem key="profile" className="h-14 gap-1" textValue="Logged in user">
           <p className="font-semibold">Signed in as</p>
           <p className="font-semibold">{user.email}</p>
         </DropdownItem>
         <DropdownItem key="dashboard" onClick={dashboard} textValue="Dashboard">Dashboard</DropdownItem>
+        <DropdownItem key="tagmanager" onClick={tagManager} textValue="Tag Manger">Tag Manager</DropdownItem>
         <DropdownItem key="logout" color="danger" onClick={signOut} textValue="Log Out">Log Out</DropdownItem>
       </DropdownMenu>
     </Dropdown>

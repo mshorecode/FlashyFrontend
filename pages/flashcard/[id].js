@@ -40,12 +40,13 @@ export default function FlashcardDetails({ id }) {
             <p>{readableDate}</p>
           </div>
           <Spacer />
-          {/* TODO: Fix PK Constriaint in backend */}
           <div className="flex gap-2">
             <p className="font-bold">Tags:</p>
-            <Chip key={flashcardDetails.tags?.id} size="sm" variant="dot" color="primary">
-              APIs
-            </Chip>
+            {flashcardDetails.tags?.map((tag) => (
+              <Chip key={tag.id} size="sm" variant="dot" color="primary">
+                {tag.label}
+              </Chip>
+            ))}
           </div>
         </ModalBody>
         <ModalFooter />

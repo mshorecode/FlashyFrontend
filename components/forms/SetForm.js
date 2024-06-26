@@ -57,9 +57,7 @@ export default function SetForm({ set }) {
         {(onClose) => (
           <>
             <form onSubmit={handleSubmit}>
-              <ModalHeader className="flex flex-col gap-1">
-                {set?.id ? 'Edit Set' : 'Create Set'}
-              </ModalHeader>
+              <ModalHeader className="flex flex-col gap-1" />
               <ModalBody>
                 <Input
                   autoFocus
@@ -82,7 +80,7 @@ export default function SetForm({ set }) {
               <ModalFooter>
                 <Checkbox
                   name="favorite"
-                  checked={formData.favorite}
+                  isSelected={formData.favorite}
                   onChange={handleChange}
                   size="md"
                   radius="sm"
@@ -93,7 +91,12 @@ export default function SetForm({ set }) {
                 >
                   Favorite
                 </Checkbox>
-                <Button color="primary" size="sm" type="submit" onPress={onClose}>
+                <Button
+                  color="primary"
+                  size="sm"
+                  type="submit"
+                  onPress={onClose}
+                >
                   Save
                 </Button>
               </ModalFooter>

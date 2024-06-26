@@ -2,7 +2,7 @@ import {
   useCallback, useEffect, useState,
 } from 'react';
 import {
-  Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Modal, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip,
+  Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Modal, Skeleton, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip,
   useDisclosure,
 } from '@nextui-org/react';
 import { deleteFlashcard, getUserFlashcards } from '../api/flashcardData';
@@ -14,6 +14,7 @@ import FlashcardDetails from './flashcard/[id]';
 import VerticalDotsIcon from '../components/icons/VerticalDotsIcon';
 import EditFlashcard from './flashcard/edit/[id]';
 import CreateFlashcard from './flashcard/new';
+import CheckIcon from '../components/icons/CheckIcon';
 
 export default function FlashcardPage() {
   const { user } = useAuth();
@@ -37,9 +38,17 @@ export default function FlashcardPage() {
     },
   ];
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
-    getUserFlashcards(user.id).then(setFlashcards);
-  }, [user.id]);
+    if (isLoaded) {
+      getUserFlashcards(user.id).then(setFlashcards).then(setIsLoaded(true));
+    } else {
+      setTimeout(() => {
+        getUserFlashcards(user.id).then(setFlashcards).then(setIsLoaded(true));
+      }, 1500);
+    }
+  }, []);
 
   const showDetails = (flashcard) => {
     setSelectedFlashcard(flashcard);
@@ -77,10 +86,16 @@ export default function FlashcardPage() {
             <p className="text-bold text-sm">{flashcard.question}</p>
           </div>
         );
+      case 'set':
+        return (
+          <>
+            {flashcard.setId !== null ? <CheckIcon /> : ''}
+          </>
+        );
       case 'actions':
         return (
           <>
-            <div className="relative items-center gap-1 sm:flex hidden">
+            <div className="relative items-center sm:flex hidden">
               <Tooltip content="Details">
                 <Button onPress={() => showDetails(flashcard)} className="bg-transparent" isIconOnly>
                   <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
@@ -88,14 +103,14 @@ export default function FlashcardPage() {
                   </span>
                 </Button>
               </Tooltip>
-              <Tooltip content="Edit flashcard">
+              <Tooltip content="Edit">
                 <Button onPress={() => editFlashcard(flashcard)} className="bg-transparent" isIconOnly>
                   <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                     <EditIcon />
                   </span>
                 </Button>
               </Tooltip>
-              <Tooltip color="danger" content="Delete flashcard">
+              <Tooltip color="danger" content="Delete">
                 <Button className="bg-transparent" onPress={() => deleteTheFlashcard(flashcard)} isIconOnly>
                   <span className="text-lg text-danger cursor-pointer active:opacity-50">
                     <DeleteIcon />
@@ -126,12 +141,13 @@ export default function FlashcardPage() {
   });
 
   return (
-    <div className="flex flex-col gap-2 justify-center my-10 mx-10">
+    <div className="flex flex-col gap-2 justify-center my-10 mx-10 lg:mx-80">
       <div className="flex justify-end mb-2">
         <Button onPress={() => createFlashcard()} className="w-28" size="sm">
           New
         </Button>
       </div>
+
       <Table aria-label="User flashcards">
         <TableHeader columns={columns}>
           {(column) => (
@@ -144,21 +160,68 @@ export default function FlashcardPage() {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={flashcards} emptyContent="No flashcards found">
-          {(flashcard) => (
-            <TableRow key={flashcard.id}>
-              {(columnKey) => <TableCell>{renderCell(flashcard, columnKey)}</TableCell>}
+        {!isLoaded ? (
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Skeleton isLoaded={isLoaded} className="h-6 w-full rounded-md" />
+              </TableCell>
+              <TableCell>
+                <Skeleton isLoaded={isLoaded} className="h-6 w-full rounded-md" />
+              </TableCell>
+              <TableCell>
+                <Skeleton isLoaded={isLoaded} className="h-6 w-full rounded-md" />
+              </TableCell>
             </TableRow>
-          )}
-        </TableBody>
+            <TableRow>
+              <TableCell>
+                <Skeleton isLoaded={isLoaded} className="h-6 w-full rounded-md" />
+              </TableCell>
+              <TableCell>
+                <Skeleton isLoaded={isLoaded} className="h-6 w-full rounded-md" />
+              </TableCell>
+              <TableCell>
+                <Skeleton isLoaded={isLoaded} className="h-6 w-full rounded-md" />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Skeleton isLoaded={isLoaded} className="h-6 w-full rounded-md" />
+              </TableCell>
+              <TableCell>
+                <Skeleton isLoaded={isLoaded} className="h-6 w-full rounded-md" />
+              </TableCell>
+              <TableCell>
+                <Skeleton isLoaded={isLoaded} className="h-6 w-full rounded-md" />
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        ) : (
+          <TableBody items={flashcards} emptyContent=" ">
+            {(flashcard) => (
+              <TableRow key={flashcard.id}>
+                {(columnKey) => (
+                  <TableCell>
+                    {renderCell(flashcard, columnKey)}
+                  </TableCell>
+                )}
+              </TableRow>
+            )}
+          </TableBody>
+        )}
       </Table>
       {selectedFlashcard && (
         <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange} placement={modalPlacement} isDismissable>
           {selectedModal === 'details' && <FlashcardDetails id={selectedFlashcard.id} />}
-          {selectedModal === 'edit' && <EditFlashcard id={selectedFlashcard.id} onClose={onOpenChange} />}
+          {selectedModal === 'edit' && (
+          <EditFlashcard
+            id={selectedFlashcard.id}
+            onClose={onOpenChange}
+          />
+          )}
         </Modal>
       )}
-      <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange} placement={modalPlacement} isDismissable isKeyboardDismissDisabled>
+      <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange} placement={modalPlacement} isDismissable>
         {selectedModal === 'new' && <CreateFlashcard id={selectedFlashcard?.id} onClose={onOpenChange} />}
       </Modal>
     </div>

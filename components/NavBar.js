@@ -15,18 +15,15 @@ export default function NavBar() {
 
   return (
     <Navbar position="sticky" onMenuOpenChange={setIsMenuOpen} isBordered>
-      {/* Left Nav */}
-      <NavbarContent>
-        <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} className="sm:hidden" />
-        <NavbarBrand>
+      <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} className="sm:hidden" />
+      <NavbarContent justify="start">
+        <NavbarBrand className="mr-4">
           <Link color="foreground" href="/dashboard">
-            <Image src="/brain.png" className="w-14 h-14" />
-            <p className="font-bold text-xl text-inherit cursor-pointer">Memoria</p>
+            <Image src="/brain.png" className="w-10 h-10" />
+            <p className="font-bold sm:block text-inherit cursor-pointer">MEMORIA</p>
           </Link>
         </NavbarBrand>
       </NavbarContent>
-
-      {/* Middle Nav */}
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link color="foreground" href="/flashcards">
@@ -38,14 +35,8 @@ export default function NavBar() {
             <p className="font-medium text-inherit cursor-pointer">Sets</p>
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/tags">
-            <p className="font-medium text-inherit cursor-pointer">Tags</p>
-          </Link>
-        </NavbarItem>
       </NavbarContent>
 
-      {/* Right Nav */}
       <NavbarContent as="div" justify="end">
         <ThemeSwitcher />
         <UserMenu />

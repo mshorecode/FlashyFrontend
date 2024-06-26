@@ -63,12 +63,13 @@ const addCardToSet = () => new Promise((resolve, reject) => {
 });
 
 // Remove card from set
-const removeCardFromSet = () => new Promise((resolve, reject) => {
+const removeCardFromSet = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/sets/removecard`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(payload),
   }).then((response) => response.json())
     .then((data) => resolve(data))
     .catch(reject);
